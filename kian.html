@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社キアン | KIAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --indigo: #1c2b4a;
+    --indigo-light: #2a3f6b;
+    --gold: #b8935a;
+    --gold-light: #d4aa72;
+    --cream: #f4ede0;
+    --cream-dark: #e8ddd0;
+    --text: #1a1814;
+    --text-mid: #4a4540;
+    --text-light: #8a8278;
+    --white: #faf8f4;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--cream);
+    color: var(--text);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8rem 3rem;
+    mix-blend-mode: normal;
+    transition: background 0.6s ease, padding 0.4s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(28, 43, 74, 0.96);
+    padding: 1.2rem 3rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.5s forwards;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.8s forwards;
+  }
+
+  .nav-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: rgba(250,248,244,0.75);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--gold-light);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    background-color: var(--indigo);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 6rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 80% 50%, rgba(42,63,107,0.6) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 10% 80%, rgba(184,147,90,0.08) 0%, transparent 60%);
+  }
+
+  .hero-line {
+    position: absolute;
+    top: 0;
+    right: 12rem;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(184,147,90,0.3) 30%, rgba(184,147,90,0.3) 70%, transparent);
+  }
+
+  .hero-year {
+    font-family: 'Cormorant', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: slideUp 1s ease 0.4s forwards;
+  }
+
+  .hero-kian-en {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(5rem, 12vw, 10rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: slideUp 1.2s ease 0.6s forwards;
+  }
+
+  .hero-kian-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 200;
+    letter-spacing: 0.6em;
+    color: rgba(250,248,244,0.5);
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: slideUp 1.2s ease 0.9s forwards;
+  }
+
+  .hero-tagline {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    font-weight: 200;
+    letter-spacing: 0.25em;
+    color: rgba(250,248,244,0.6);
+    line-height: 2.4;
+    max-width: 28rem;
+    border-left: 1px solid var(--gold);
+    padding-left: 1.8rem;
+    opacity: 0;
+    animation: slideUp 1.2s ease 1.2s forwards;
+  }
+
+  .hero-tagline em {
+    font-style: italic;
+    font-family: 'Cormorant', serif;
+    font-size: 1.1em;
+    color: var(--gold-light);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    left: 6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 2s forwards;
+  }
+
+  .hero-scroll span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: rgba(250,248,244,0.4);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 3rem;
+    height: 1px;
+    background: var(--gold);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section {
+    padding: 8rem 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* ── KIAN / 名前の由来 ── */
+  #origin {
+    background-color: var(--indigo);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #origin .section-label {
+    color: rgba(212,170,114,0.8);
+  }
+
+  #origin .section-label::after {
+    background: rgba(212,170,114,0.5);
+  }
+
+  .origin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .origin-kanji {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(5rem, 10vw, 8rem);
+    font-weight: 200;
+    color: rgba(250,248,244,0.08);
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    letter-spacing: 0.2em;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .origin-heading {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+  }
+
+  .origin-heading .jp {
+    display: block;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.45em;
+    font-style: normal;
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .origin-text {
+    font-size: 0.92rem;
+    line-height: 2.5;
+    letter-spacing: 0.08em;
+    color: rgba(250,248,244,0.72);
+  }
+
+  .origin-text + .origin-text {
+    margin-top: 1.8rem;
+  }
+
+  .origin-quote {
+    border-left: 2px solid var(--gold);
+    padding: 2rem 2.5rem;
+    margin-top: 3rem;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .origin-quote p {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.95rem;
+    font-weight: 200;
+    line-height: 2.6;
+    letter-spacing: 0.12em;
+    color: rgba(250,248,244,0.85);
+    font-style: italic;
+  }
+
+  .origin-quote cite {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-top: 1.2rem;
+    font-style: normal;
+  }
+
+  .origin-year-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .origin-year-list li {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: 1.5rem;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid rgba(250,248,244,0.08);
+    align-items: baseline;
+  }
+
+  .origin-year-list .year {
+    font-family: 'Cormorant', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .origin-year-list .desc {
+    font-size: 0.85rem;
+    line-height: 1.9;
+    letter-spacing: 0.08em;
+    color: rgba(250,248,244,0.65);
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background-color: var(--white);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 7rem;
+    align-items: start;
+  }
+
+  .about-name {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--indigo);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-name-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 200;
+    letter-spacing: 0.5em;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+  }
+
+  .about-text {
+    font-size: 0.92rem;
+    line-height: 2.6;
+    letter-spacing: 0.08em;
+    color: var(--text-mid);
+  }
+
+  .about-text + .about-text {
+    margin-top: 1.8rem;
+  }
+
+  .about-sidebar {
+    padding-top: 1rem;
+  }
+
+  .about-tag {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    padding: 0.4rem 1rem;
+    margin: 0.3rem 0.3rem 0.3rem 0;
+  }
+
+  .about-affiliation {
+    margin-top: 2.5rem;
+  }
+
+  .about-affiliation h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .about-affiliation ul {
+    list-style: none;
+  }
+
+  .about-affiliation ul li {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    letter-spacing: 0.06em;
+    color: var(--text-mid);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    display: flex;
+    gap: 0.8rem;
+    align-items: baseline;
+  }
+
+  .about-affiliation ul li::before {
+    content: '—';
+    color: var(--gold);
+    font-family: 'Cormorant', serif;
+    flex-shrink: 0;
+  }
+
+  /* ── SERVICE ── */
+  #service {
+    background-color: var(--cream);
+  }
+
+  .service-heading {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--indigo);
+    margin-bottom: 1rem;
+  }
+
+  .service-sub {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.88rem;
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    color: var(--text-light);
+    margin-bottom: 5rem;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(28,43,74,0.12);
+  }
+
+  .service-item {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid rgba(28,43,74,0.12);
+    border-bottom: 1px solid rgba(28,43,74,0.12);
+    transition: background 0.4s ease;
+  }
+
+  .service-item:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-item:hover {
+    background: rgba(28,43,74,0.03);
+  }
+
+  .service-num {
+    font-family: 'Cormorant', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: rgba(28,43,74,0.1);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-title-en {
+    font-family: 'Cormorant', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--indigo);
+    margin-bottom: 0.3rem;
+  }
+
+  .service-title-jp {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .service-desc {
+    font-size: 0.83rem;
+    line-height: 2.2;
+    letter-spacing: 0.06em;
+    color: var(--text-mid);
+  }
+
+  /* ── PHILOSOPHY ── */
+  #philosophy {
+    background-color: var(--indigo);
+    padding: 10rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .philosophy-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(42,63,107,0.8) 0%, transparent 70%);
+  }
+
+  .philosophy-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 200;
+    letter-spacing: 0.5em;
+    color: rgba(250,248,244,0.9);
+    line-height: 3;
+    position: relative;
+    z-index: 1;
+  }
+
+  .philosophy-en {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .philosophy-line {
+    width: 1px;
+    height: 5rem;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 3rem auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background-color: var(--white);
+    padding: 8rem 0;
+  }
+
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    text-align: center;
+  }
+
+  .contact-heading {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--indigo);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-sub {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.85rem;
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    color: var(--text-light);
+    margin-bottom: 3.5rem;
+  }
+
+  .contact-note {
+    font-size: 0.85rem;
+    line-height: 2.4;
+    letter-spacing: 0.08em;
+    color: var(--text-mid);
+    margin-bottom: 3.5rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--text-light);
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--cream-dark);
+    padding: 0.8rem 0;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.3s ease;
+    letter-spacing: 0.08em;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  .form-group textarea {
+    min-height: 8rem;
+  }
+
+  .submit-btn {
+    margin-top: 1.5rem;
+    align-self: center;
+    background: var(--indigo);
+    color: var(--white);
+    border: none;
+    padding: 1.1rem 4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    background: var(--indigo-light);
+    transform: translateY(-1px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background-color: var(--indigo);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(250,248,244,0.6);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-info {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: rgba(250,248,244,0.3);
+    text-align: right;
+    line-height: 2;
+  }
+
+  .footer-domain {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-top: 0.3rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(2rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleX(1); opacity: 1; }
+    50% { transform: scaleX(0.7); opacity: 0.5; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(2.5rem);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #hero { padding: 0 2rem; }
+    .container { padding: 0 2rem; }
+    nav { padding: 1.5rem 2rem; }
+    nav.scrolled { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .origin-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .service-grid { grid-template-columns: 1fr; }
+    .service-item { border-right: none; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-info { text-align: center; }
+    .hero-line { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Kian</a>
+  <ul class="nav-links">
+    <li><a href="#origin">Origin</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#service">Service</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" style="color: rgba(250,248,244,0.4); font-size:0.7rem;">EN</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-year">Est. 2024 — Shuri, Okinawa</div>
+  <div class="hero-kian-en">Kian</div>
+  <div class="hero-kian-jp">株 式 会 社 キ ア ン</div>
+  <div class="hero-tagline">
+    深く知り、丁寧に伝え、次の世代へつなぐ。<br>
+    <em>To know deeply.<br>
+    To convey with care.<br>
+    To pass on to the next generation.</em>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ORIGIN / キアンの由来 -->
+<section id="origin">
+  <div class="container">
+    <div class="section-label">Origin — キアンという名前</div>
+    <div class="origin-kanji">喜安</div>
+
+    <div class="origin-grid">
+      <div>
+        <h2 class="origin-heading">
+          <span class="jp">1566 — 1653</span>
+          Kian,<br>the Monk<br>of Ryukyu.
+        </h2>
+
+        <p class="origin-text">
+          喜安（1566年－1653年）。和泉国堺に生まれ、1600年に琉球へ渡った日本の僧侶・茶人。
+          第7代尚寧王に茶道師範として仕え、王国の文化の中枢に深く関わった。
+        </p>
+        <p class="origin-text">
+          1609年、島津氏による琉球侵攻という歴史の激変を、「喜安日記」として記録した。
+          生粋の琉球人ではない。しかしだからこそ、外の目で内を深く見つめ、記録し、伝えることができた。
+        </p>
+
+        <div class="origin-quote">
+          <p>
+            「閔氏喜安入道蕃元の『喜安日記』からインスパイアされた名前。
+            よそ者として沖縄に渡り、本物に向き合い続けることへの覚悟を、この名に込めた。」
+          </p>
+          <cite>— 代表取締役 いのうえちず</cite>
+        </div>
+      </div>
+
+      <div>
+        <ul class="origin-year-list">
+          <li>
+            <span class="year">2004</span>
+            <span class="desc">沖縄ナビ発刊。沖縄との本格的な関わりが始まる</span>
+          </li>
+          <li>
+            <span class="year">2005</span>
+            <span class="desc">沖縄移住ナビ発刊</span>
+          </li>
+          <li>
+            <span class="year">2007</span>
+            <span class="desc">東京—那覇、二拠点生活を開始</span>
+          </li>
+          <li>
+            <span class="year">2008</span>
+            <span class="desc">沖縄へ本格移住</span>
+          </li>
+          <li>
+            <span class="year">2009</span>
+            <span class="desc">琉球・沖縄文化誌『モモト』創刊。編集・副編集長として携わる</span>
+          </li>
+          <li>
+            <span class="year">2022</span>
+            <span class="desc">首里織染館 suikara 立ち上げメンバー参画</span>
+          </li>
+          <li>
+            <span class="year">2024</span>
+            <span class="desc">モモト休刊ののち、株式会社キアン設立</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About — いのうえちず</div>
+    <div class="about-grid">
+      <div>
+        <div class="about-name">Chizu Inoue</div>
+        <div class="about-name-jp">い の う え　ち ず</div>
+
+        <p class="about-text">
+          広島県出身。2008年より沖縄に本格移住。
+          ライター・編集者として、琉球・沖縄の文化と歴史を20年にわたり記録し、伝え続けてきた。
+        </p>
+        <p class="about-text">
+          琉球・沖縄文化誌『モモト』の副編集長として、「100年残せる沖縄の雑誌」を目指した編集を牽引。
+          首里まちづくり研究会理事、首里城再建への意見、琉球王国文化遺産集積・再興事業など、
+          沖縄の文化的中枢との深い関わりを持つ。
+        </p>
+        <p class="about-text">
+          本物志向・知的好奇心の高いゲストへの沖縄文化のアテンド、ハイエンドブランドとのコラボレーション、
+          宮沢和史プロデュース「宮古島の旅」企画・ガイドなど、
+          質の高い体験設計を現場で実現してきた。
+        </p>
+        <p class="about-text">
+          世界のウチナーンチュ大会を通じ、ハワイ・中南米など世界に散らばるウチナーンチュとの
+          ネットワークを持つ。英語対応可。
+        </p>
+      </div>
+
+      <div class="about-sidebar">
+        <div style="margin-bottom:2rem;">
+          <span class="about-tag">Editor</span>
+          <span class="about-tag">Writer</span>
+          <span class="about-tag">Director</span>
+          <span class="about-tag">Cultural Guide</span>
+          <span class="about-tag">Ryukyu Culture</span>
+          <span class="about-tag">Shuri</span>
+          <span class="about-tag">Ryusou</span>
+        </div>
+
+        <div class="about-affiliation">
+          <h4>所属・関与</h4>
+          <ul>
+            <li>首里まちづくり研究会（すいまち研）理事</li>
+            <li>沖縄県・那覇市 首里城再建関与</li>
+            <li>美ら島財団 業務委託（首里城ガイド企画等）</li>
+            <li>NHK九州沖縄地方放送番組審議会 ２期４年（満了）</li>
+            <li>琉球王国文化遺産集積・再興事業</li>
+            <li>若梅会 理事（故中山きく氏の意思の継承）</li>
+            <li>首里織染館 suikara 立ち上げメンバー（2022-2024）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="philosophy-bg"></div>
+  <div class="philosophy-line"></div>
+  <p class="philosophy-jp reveal">
+    思っているだけでは、平和は来ない。<br>行動するのよ。
+  </p>
+  <p class="philosophy-en reveal">
+    — 故 中山きく（若梅会）
+  </p>
+  <div class="philosophy-line"></div>
+</section>
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="container">
+    <div class="section-label">Service — できること</div>
+    <h2 class="service-heading reveal">What Kian offers.</h2>
+    <p class="service-sub reveal">本物の沖縄を、本物を求める人たちへ</p>
+
+    <div class="service-grid">
+      <div class="service-item reveal">
+        <div class="service-num">01</div>
+        <div class="service-title-en">Cultural Direction</div>
+        <div class="service-title-jp">文化体験のディレクション</div>
+        <p class="service-desc">
+          ハイエンドブランド・旅行エージェントとの連携による、本物志向のゲストへの沖縄文化体験の設計と現場ディレクション。琉装（本物）でのアテンドも可。
+        </p>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">02</div>
+        <div class="service-title-en">Editorial & Writing</div>
+        <div class="service-title-jp">編集・ライティング</div>
+        <p class="service-desc">
+          琉球・沖縄の文化・歴史・自然をテーマにした、媒体・企業制作物の編集・執筆・ディレクション。「消費されない」深度のコンテンツ制作。
+        </p>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">03</div>
+        <div class="service-title-en">Planning & Guide</div>
+        <div class="service-title-jp">企画・ガイド</div>
+        <p class="service-desc">
+          観光事業者・自治体・メディアとの協業による沖縄体験プログラムの企画立案と現地ガイド。首里・琉球文化を軸にした本質的な沖縄の伝え方。
+        </p>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">04</div>
+        <div class="service-title-en">Shuri & Ryukyu Heritage</div>
+        <div class="service-title-jp">首里・琉球文化遺産</div>
+        <p class="service-desc">
+          首里城再建、琉球王国文化遺産集積・再興事業など、沖縄の文化的中枢への深い関与を背景にした、専門的な知見の提供・監修・講演。
+        </p>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">05</div>
+        <div class="service-title-en">Peace & Memory</div>
+        <div class="service-title-jp">平和の記憶を伝える</div>
+        <p class="service-desc">
+          若梅会理事として、故中山きく氏の意思を引き継ぎ、戦争の記憶と「行動する平和」を次世代へ伝えるための活動・講演・コンテンツ制作。
+        </p>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">06</div>
+        <div class="service-title-en">Consultation</div>
+        <div class="service-title-jp">相談・コンサルティング</div>
+        <p class="service-desc">
+          沖縄を舞台にした事業・コンテンツ・プロジェクトへの参画、アドバイザリー。世界のウチナーンチュネットワーク（ハワイ・中南米等）との連携も可。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center;">Contact — お問い合わせ</div>
+    <h2 class="contact-heading reveal">Get in touch.</h2>
+    <p class="contact-sub reveal">ご依頼・ご相談</p>
+    <p class="contact-note reveal">
+      法人・団体・個人を問わず、お気軽にご相談ください。<br>
+      内容を確認のうえ、担当よりご連絡いたします。<br>
+      <br>
+      <em style="font-family:'Cormorant',serif;font-size:1.05em;font-style:italic;color:var(--text-light);">
+        Inquiries in English are welcome.
+      </em>
+    </p>
+
+    <form class="contact-form reveal">
+      <div class="form-group">
+        <label>お名前 / Name</label>
+        <input type="text" placeholder="いのうえ　ちず">
+      </div>
+      <div class="form-group">
+        <label>会社・団体名 / Organization</label>
+        <input type="text" placeholder="株式会社　例">
+      </div>
+      <div class="form-group">
+        <label>メールアドレス / Email</label>
+        <input type="email" placeholder="info@example.com">
+      </div>
+      <div class="form-group">
+        <label>ご用件 / Message</label>
+        <textarea rows="6" placeholder="ご依頼・ご相談の内容をお書きください。"></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send — 送信する</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Kian — 株式会社キアン</div>
+  <div class="footer-info">
+    <div>© 2024 株式会社キアン. All rights reserved.</div>
+    <div style="margin-top:0.3rem; color:rgba(250,248,244,0.2); font-size:0.68rem; letter-spacing:0.15em;">
+      代表取締役　いのうえちず　｜　首里、沖縄
+    </div>
+    <div class="footer-domain">kian.ryukyu</div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger reveal for grid items
+  const serviceItems = document.querySelectorAll('.service-item.reveal');
+  const serviceObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        serviceObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  serviceItems.forEach(el => serviceObserver.observe(el));
+
+  // Form submit (placeholder)
+  document.querySelector('.contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('送信機能は実装予定です。ありがとうございます。');
+  });
+</script>
+</body>
+</html>
