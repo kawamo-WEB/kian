@@ -16,14 +16,14 @@
     --gold-light: #c9a870;
     --cream: #f4ede0;
     --cream-dark: #e8ddd0;
-    --text: #1a1814;
-    --text-mid: #4a4540;
-    --text-light: #8a8278;
+    --text: #111010;
+    --text-mid: #2e2c2a;
+    --text-light: #5a5650;
     --white: #ffffff;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; font-size: 18px; }
 
   body {
     background-color: var(--white);
@@ -90,17 +90,18 @@
     justify-content: center;
     width: 30px;
     height: 30px;
-    border: 1px solid rgba(28,43,74,0.2);
     border-radius: 50%;
-    color: var(--text-light);
     text-decoration: none;
-    transition: border-color 0.3s ease, color 0.3s ease;
+    transition: opacity 0.3s ease;
+    border: none;
+    background: transparent;
   }
-  .nav-sns a:hover { border-color: var(--gold); color: var(--gold); }
-  .nav-sns svg { width: 13px; height: 13px; }
-  .nav-sns .icon-fb { fill: currentColor; stroke: none; }
-  .nav-sns .icon-stroke { fill: none; stroke: currentColor; stroke-width: 2; }
-  .nav-sns .icon-note { fill: currentColor; stroke: none; }
+  .nav-sns a:hover { opacity: 0.75; }
+  .nav-sns svg { width: 28px; height: 28px; }
+  .nav-sns .icon-fb { fill: #1877F2; stroke: none; }
+  .nav-sns .icon-insta { fill: none; stroke: url(#insta-grad); stroke-width: 2; }
+  .nav-sns .icon-insta-dot { fill: #E4405F; stroke: none; }
+  .nav-sns .icon-note { fill: #41C9B4; stroke: none; }
 
   /* ── HERO ── */
   #hero {
@@ -637,13 +638,27 @@
   </ul>
   <div class="nav-sns">
     <a href="https://www.facebook.com/soulsisterchizu" target="_blank" rel="noopener" aria-label="Facebook">
-      <svg class="icon-fb" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      <svg viewBox="0 0 24 24" width="28" height="28"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M15.5 8H13V6.5c0-.6.4-.7.7-.7H15V3.1l-2.6-.1C9.8 3 9 4.9 9 6.5V8H7v3h2v9h4v-9h2.7l.8-3z"/></svg>
     </a>
     <a href="https://www.instagram.com/chizuinouye/" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg class="icon-stroke" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      <svg viewBox="0 0 24 24" width="28" height="28">
+        <defs>
+          <radialGradient id="ig1" cx="30%" cy="107%" r="150%">
+            <stop offset="0%" stop-color="#fdf497"/>
+            <stop offset="10%" stop-color="#fdf497"/>
+            <stop offset="50%" stop-color="#fd5949"/>
+            <stop offset="68%" stop-color="#d6249f"/>
+            <stop offset="100%" stop-color="#285AEB"/>
+          </radialGradient>
+        </defs>
+        <rect x="0" y="0" width="24" height="24" rx="6" fill="url(#ig1)"/>
+        <rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="17" cy="7" r="1" fill="#fff"/>
+      </svg>
     </a>
     <a href="https://note.com/chizu_inouye" target="_blank" rel="noopener" aria-label="note">
-      <svg class="icon-note" viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v10l-5 5H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 4v2h14V7H5zm0 4v2h9v-2H5z"/></svg>
+      <svg viewBox="0 0 24 24" width="28" height="28"><rect width="24" height="24" rx="5" fill="#41C9B4"/><path fill="#fff" d="M6 7h12v2H6zm0 4h8v2H6zm0 4h10v2H6z"/></svg>
     </a>
   </div>
 </nav>
@@ -821,6 +836,32 @@
 </footer>
 
 <script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  const serviceObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        serviceObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.service-item.reveal').forEach(el => serviceObserver.observe(el));
+
   // トピックス 直接埋め込み（note RSS より）
   document.getElementById('topics-grid').innerHTML = `
     <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n9012be81c2e3" target="_blank" rel="noopener">
@@ -840,33 +881,6 @@
     </a>
   `;
   document.querySelectorAll('#topics-grid .reveal').forEach(el => observer.observe(el));
-
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  const serviceItems = document.querySelectorAll('.service-item.reveal');
-  const serviceObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        serviceObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.05 });
-  serviceItems.forEach(el => serviceObserver.observe(el));
 
   document.querySelector('.contact-form').addEventListener('submit', (e) => {
     e.preventDefault();
