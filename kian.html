@@ -821,40 +821,25 @@
 </footer>
 
 <script>
-  // note RSS からトピックス取得（CORSプロキシ経由）
-  (async () => {
-    const grid = document.getElementById('topics-grid');
-    try {
-      const proxy = 'https://api.allorigins.win/get?url=';
-      const target = encodeURIComponent('https://note.com/chizu_inouye/rss');
-      const res = await fetch(proxy + target);
-      const data = await res.json();
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(data.contents, 'text/xml');
-      const items = Array.from(xml.querySelectorAll('item')).slice(0, 3);
-      if (items.length === 0) throw new Error('no items');
-      grid.innerHTML = items.map(item => {
-        const title = item.querySelector('title')?.textContent || '';
-        const link  = item.querySelector('link')?.textContent || 'https://note.com/chizu_inouye';
-        const desc  = item.querySelector('description')?.textContent.replace(/<[^>]*>/g,'').slice(0, 80) + '…' || '';
-        const pubDate = item.querySelector('pubDate')?.textContent || '';
-        const date = pubDate ? new Date(pubDate).toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'}) : '';
-        return `<a class="topic-card reveal" href="${link}" target="_blank" rel="noopener">
-          <div class="topic-date">${date}</div>
-          <div class="topic-title">${title}</div>
-          <div class="topic-excerpt">${desc}</div>
-        </a>`;
-      }).join('');
-      grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    } catch(e) {
-      grid.innerHTML = `
-        <a class="topic-card" href="https://note.com/chizu_inouye" target="_blank" rel="noopener">
-          <div class="topic-date">note</div>
-          <div class="topic-title">いのうえちずのnoteを読む</div>
-          <div class="topic-excerpt">沖縄の文化・歴史・日々の記録をnoteで発信しています。</div>
-        </a>`;
-    }
-  })();
+  // トピックス 直接埋め込み（note RSS より）
+  document.getElementById('topics-grid').innerHTML = `
+    <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n9012be81c2e3" target="_blank" rel="noopener">
+      <div class="topic-date">2025年10月21日</div>
+      <div class="topic-title">遺族の追慕の情を侵害しないデジタルアーカイブ</div>
+      <div class="topic-excerpt">放送局からの取材依頼を機に、戦争体験者の証言映像・肖像権・デジタルアーカイブの整備について考える。</div>
+    </a>
+    <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n0e6b04a7ffb9" target="_blank" rel="noopener">
+      <div class="topic-date">2025年10月11日</div>
+      <div class="topic-title">足るを知れない業の深さ</div>
+      <div class="topic-excerpt">「知るヨロコビ」を軸に、映画・網走監獄・おとゆいオーケストラ・島口説など、最近の「知らなかった！」体験を綴る。</div>
+    </a>
+    <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n77070aec1200" target="_blank" rel="noopener">
+      <div class="topic-date">2025年10月11日</div>
+      <div class="topic-title">戦後80年のヌジファ ―戦災文化財が語る行動―</div>
+      <div class="topic-excerpt">沖縄県立博物館の特別展「戦災文化財」を通じ、戦後ゼロから文化財を拾い集めた人々の行動の蓄積を辿る。</div>
+    </a>
+  `;
+  document.querySelectorAll('#topics-grid .reveal').forEach(el => observer.observe(el));
 
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
