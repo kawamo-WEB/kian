@@ -78,6 +78,29 @@
     transition: color 0.3s ease;
   }
   .nav-links a:hover { color: var(--gold); }
+  .nav-sns {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    margin-left: 1.5rem;
+  }
+  .nav-sns a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(28,43,74,0.2);
+    border-radius: 50%;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .nav-sns a:hover { border-color: var(--gold); color: var(--gold); }
+  .nav-sns svg { width: 13px; height: 13px; }
+  .nav-sns .icon-fb { fill: currentColor; stroke: none; }
+  .nav-sns .icon-stroke { fill: none; stroke: currentColor; stroke-width: 2; }
+  .nav-sns .icon-note { fill: currentColor; stroke: none; }
 
   /* ── HERO ── */
   #hero {
@@ -195,101 +218,69 @@
     background: var(--gold);
   }
 
-  /* ── ORIGIN ── */
-  #origin {
+  /* ── TOPICS ── */
+  #topics {
     background-color: var(--white);
     border-top: 1px solid rgba(28,43,74,0.07);
-    border-bottom: 1px solid rgba(28,43,74,0.07);
   }
-  .origin-grid {
+  .topics-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-  .origin-kanji {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: clamp(5rem, 10vw, 8rem);
-    font-weight: 200;
-    color: rgba(28,43,74,0.05);
-    position: absolute;
-    right: 3rem; top: 50%;
-    transform: translateY(-50%);
-    writing-mode: vertical-rl;
-    letter-spacing: 0.2em;
-    user-select: none;
-    pointer-events: none;
-  }
-  .origin-heading {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 300;
-    
-    line-height: 1.3;
-    color: var(--indigo);
-    margin-bottom: 2.5rem;
-  }
-  .origin-heading .jp {
-    display: block;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.38em;
-    font-style: normal;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
-  .origin-text {
-    font-size: 1.0rem;
-    line-height: 2.5;
-    letter-spacing: 0.06em;
-    color: var(--text-mid);
-  }
-  .origin-text + .origin-text { margin-top: 1.8rem; }
-
-  .origin-quote {
-    border-left: 2px solid var(--gold);
-    padding: 2rem 2.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
     margin-top: 3rem;
-    background: rgba(184,147,90,0.04);
   }
-  .origin-quote p {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.0rem;
-    font-weight: 300;
-    line-height: 2.6;
-    letter-spacing: 0.1em;
-    color: var(--text-mid);
-  }
-  .origin-quote cite {
+  .topic-card {
     display: block;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.82rem;
+    text-decoration: none;
+    border: 1px solid rgba(28,43,74,0.1);
+    padding: 2rem;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    color: inherit;
+  }
+  .topic-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+  .topic-date {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .topic-title {
+    font-size: 1.0rem;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .topic-excerpt {
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--text-light);
+    letter-spacing: 0.04em;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .topic-more {
+    display: inline-block;
+    margin-top: 3rem;
+    font-size: 0.85rem;
     letter-spacing: 0.25em;
     color: var(--gold);
-    margin-top: 1.2rem;
-    font-style: normal;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 0.2rem;
+    transition: opacity 0.3s ease;
   }
-  .origin-year-list { list-style: none; }
-  .origin-year-list li {
-    display: grid;
-    grid-template-columns: 5rem 1fr;
-    gap: 1.5rem;
-    padding: 1.4rem 0;
-    border-bottom: 1px solid rgba(28,43,74,0.08);
-    align-items: baseline;
-  }
-  .origin-year-list .year {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: var(--gold);
-  }
-  .origin-year-list .desc {
-    font-size: 0.95rem;
-    line-height: 1.9;
-    letter-spacing: 0.05em;
-    color: var(--text-mid);
+  .topic-more:hover { opacity: 0.6; }
+  .topics-loading {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
   }
 
   /* ── ABOUT ── */
@@ -639,12 +630,22 @@
 <nav id="nav">
   <a href="#hero" class="nav-logo">Kian</a>
   <ul class="nav-links">
-    <li><a href="#origin">Origin</a></li>
+    <li><a href="#topics">Topics</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#service">Service</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#" style="color:rgba(28,43,74,0.3);font-size:0.75rem;">EN</a></li>
   </ul>
+  <div class="nav-sns">
+    <a href="https://www.facebook.com/soulsisterchizu" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg class="icon-fb" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/chizuinouye/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg class="icon-stroke" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://note.com/chizu_inouye" target="_blank" rel="noopener" aria-label="note">
+      <svg class="icon-note" viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v10l-5 5H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 4v2h14V7H5zm0 4v2h9v-2H5z"/></svg>
+    </a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -666,45 +667,14 @@
   </div>
 </section>
 
-<!-- ORIGIN -->
-<section id="origin">
-  <div class="container" style="position:relative;">
-    <div class="section-label">Origin — キアンという名前</div>
-    <div class="origin-kanji">喜安</div>
-    <div class="origin-grid">
-      <div>
-        <h2 class="origin-heading">
-          <span class="jp">1566 — 1653</span>
-          Kian,<br>the Monk<br>of Ryukyu.
-        </h2>
-        <p class="origin-text">
-          喜安（1566年－1653年）。和泉国堺に生まれ、1600年に琉球へ渡った日本の僧侶・茶人。
-          第7代尚寧王に茶道師範として仕え、王国の文化の中枢に深く関わった。
-        </p>
-        <p class="origin-text">
-          1609年、島津氏による琉球侵攻という歴史の激変を、「喜安日記」として記録した。
-          生粋の琉球人ではない。しかしだからこそ、外の目で内を深く見つめ、記録し、伝えることができた。
-        </p>
-        <div class="origin-quote">
-          <p>
-            「閔氏喜安入道蕃元の『喜安日記』からインスパイアされた名前。
-            よそ者として沖縄に渡り、本物に向き合い続けることへの覚悟を、この名に込めた。」
-          </p>
-          <cite>— 代表取締役 いのうえちず</cite>
-        </div>
-      </div>
-      <div>
-        <ul class="origin-year-list">
-          <li><span class="year">2004</span><span class="desc">沖縄ナビ発刊。沖縄との本格的な関わりが始まる</span></li>
-          <li><span class="year">2005</span><span class="desc">沖縄移住ナビ発刊</span></li>
-          <li><span class="year">2007</span><span class="desc">東京—那覇、二拠点生活を開始</span></li>
-          <li><span class="year">2008</span><span class="desc">沖縄へ本格移住</span></li>
-          <li><span class="year">2009</span><span class="desc">琉球・沖縄文化誌『モモト』創刊。編集・副編集長として携わる</span></li>
-          <li><span class="year">2022</span><span class="desc">首里織染館 suikara 立ち上げメンバー参画</span></li>
-          <li><span class="year">2024</span><span class="desc">モモト休刊ののち、株式会社キアン設立</span></li>
-        </ul>
-      </div>
+<!-- TOPICS -->
+<section id="topics">
+  <div class="container">
+    <div class="section-label">Topics — トピックス</div>
+    <div id="topics-grid" class="topics-grid">
+      <p class="topics-loading">記事を読み込み中...</p>
     </div>
+    <a href="https://note.com/chizu_inouye" target="_blank" rel="noopener" class="topic-more">note をもっと見る →</a>
   </div>
 </section>
 
@@ -847,24 +817,38 @@
       代表取締役　いのうえちず　｜　首里、沖縄
     </div>
     <div class="footer-domain">kian.ryukyu</div>
-    <div class="footer-sns">
-      <a href="https://www.facebook.com/soulsisterchizu" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg class="icon-fb" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-        </svg>
-      </a>
-      <a href="https://www.instagram.com/chizuinouye/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-          <circle cx="17.5" cy="6.5" r="1.2"/>
-        </svg>
-      </a>
-    </div>
   </div>
 </footer>
 
 <script>
+  // note API からトピックス取得
+  (async () => {
+    const grid = document.getElementById('topics-grid');
+    try {
+      const res = await fetch('https://note.com/api/v2/creators/chizu_inouye/contents?kind=note&page=1');
+      const data = await res.json();
+      const articles = (data.data && data.data.contents) ? data.data.contents.slice(0, 3) : [];
+      if (articles.length === 0) throw new Error('no articles');
+      grid.innerHTML = articles.map(a => {
+        const date = a.publishAt ? new Date(a.publishAt).toLocaleDateString('ja-JP', {year:'numeric', month:'long', day:'numeric'}) : '';
+        const excerpt = a.body ? a.body.replace(/<[^>]*>/g, '').slice(0, 80) + '…' : '';
+        return `<a class="topic-card reveal" href="${a.noteUrl || 'https://note.com/chizu_inouye'}" target="_blank" rel="noopener">
+          <div class="topic-date">${date}</div>
+          <div class="topic-title">${a.name || ''}</div>
+          <div class="topic-excerpt">${excerpt}</div>
+        </a>`;
+      }).join('');
+      grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    } catch(e) {
+      grid.innerHTML = `
+        <a class="topic-card" href="https://note.com/chizu_inouye" target="_blank" rel="noopener">
+          <div class="topic-date">note</div>
+          <div class="topic-title">いのうえちずのnoteを読む</div>
+          <div class="topic-excerpt">沖縄の文化・歴史・日々の記録をnoteで発信しています。</div>
+        </a>`;
+    }
+  })();
+
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
