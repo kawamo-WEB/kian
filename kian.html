@@ -111,9 +111,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    padding: 0 6rem;
+    align-items: center;
     overflow: hidden;
+  }
+  .hero-content {
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 4rem;
+    text-align: left;
   }
   .hero-line {
     position: absolute;
@@ -179,7 +184,9 @@
   }
   .hero-scroll {
     position: absolute;
-    bottom: 3rem; left: 6rem;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -227,14 +234,14 @@
   .topics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 3rem;
   }
   .topic-card {
     display: block;
     text-decoration: none;
     border: 1px solid rgba(28,43,74,0.1);
-    padding: 2rem;
+    padding: 1.8rem 2rem;
     transition: border-color 0.3s ease, transform 0.3s ease;
     color: inherit;
   }
@@ -243,28 +250,17 @@
     transform: translateY(-3px);
   }
   .topic-date {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     color: var(--gold);
     margin-bottom: 0.8rem;
   }
   .topic-title {
-    font-size: 1.0rem;
+    font-size: 0.89rem;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 1.9;
     letter-spacing: 0.05em;
     color: var(--text);
-    margin-bottom: 1rem;
-  }
-  .topic-excerpt {
-    font-size: 0.88rem;
-    line-height: 1.9;
-    color: var(--text-light);
-    letter-spacing: 0.04em;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
   .topic-more {
     display: inline-block;
@@ -610,11 +606,12 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    #hero { padding: 0 2rem; }
+    .hero-content { padding: 0 2rem; }
     .container { padding: 0 2rem; }
     nav { padding: 1.5rem 2rem; }
     nav.scrolled { padding: 1rem 2rem; }
     .nav-links { display: none; }
+    .topics-grid { grid-template-columns: 1fr; gap: 1rem; }
     .origin-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .service-grid { grid-template-columns: 1fr; }
@@ -667,14 +664,16 @@
 <section id="hero">
   <div class="hero-line"></div>
   <div class="hero-border-bottom"></div>
-  <div class="hero-year">Est. 2024 — Shuri, Okinawa</div>
-  <div class="hero-kian-en">Kian</div>
-  <div class="hero-kian-jp">株 式 会 社 キ ア ン</div>
-  <div class="hero-tagline">
-    深く知り、丁寧に伝え、次の世代へつなぐ。<br>
-    <em>To know deeply.<br>
-    To convey with care.<br>
-    To pass on to the next generation.</em>
+  <div class="hero-content">
+    <div class="hero-year">Est. 2024 — Shuri, Okinawa</div>
+    <div class="hero-kian-en">Kian</div>
+    <div class="hero-kian-jp">株 式 会 社 キ ア ン</div>
+    <div class="hero-tagline">
+      深く知り、丁寧に伝え、次の世代へつなぐ。<br>
+      <em>To know deeply.<br>
+      To convey with care.<br>
+      To pass on to the next generation.</em>
+    </div>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -867,17 +866,14 @@
     <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n9012be81c2e3" target="_blank" rel="noopener">
       <div class="topic-date">2025年10月21日</div>
       <div class="topic-title">遺族の追慕の情を侵害しないデジタルアーカイブ</div>
-      <div class="topic-excerpt">放送局からの取材依頼を機に、戦争体験者の証言映像・肖像権・デジタルアーカイブの整備について考える。</div>
     </a>
     <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n0e6b04a7ffb9" target="_blank" rel="noopener">
       <div class="topic-date">2025年10月11日</div>
       <div class="topic-title">足るを知れない業の深さ</div>
-      <div class="topic-excerpt">「知るヨロコビ」を軸に、映画・網走監獄・おとゆいオーケストラ・島口説など、最近の「知らなかった！」体験を綴る。</div>
     </a>
     <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n77070aec1200" target="_blank" rel="noopener">
       <div class="topic-date">2025年10月11日</div>
       <div class="topic-title">戦後80年のヌジファ ―戦災文化財が語る行動―</div>
-      <div class="topic-excerpt">沖縄県立博物館の特別展「戦災文化財」を通じ、戦後ゼロから文化財を拾い集めた人々の行動の蓄積を辿る。</div>
     </a>
   `;
   document.querySelectorAll('#topics-grid .reveal').forEach(el => observer.observe(el));
