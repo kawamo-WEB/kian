@@ -293,20 +293,20 @@
   }
   .about-name {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 300;
-    
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
     color: var(--indigo);
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    margin-bottom: 3rem;
   }
   .about-name-jp {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300;
-    letter-spacing: 0.5em;
-    color: var(--text-light);
-    margin-bottom: 3rem;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
   }
   .about-text {
     font-size: 1.0rem;
@@ -396,9 +396,8 @@
   }
   .service-heading {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 300;
-    
+    font-size: 1.375rem;
+    font-weight: 400;
     color: var(--indigo);
     margin-bottom: 1rem;
   }
@@ -435,19 +434,19 @@
   }
   .service-title-en {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    
-    color: var(--indigo);
-    margin-bottom: 0.3rem;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
   }
   .service-title-jp {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.18em;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: var(--indigo);
+    margin-bottom: 0.3rem;
+    font-weight: 500;
   }
   .service-desc {
     font-size: 0.95rem;
@@ -470,9 +469,8 @@
   }
   .contact-heading {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 300;
-    
+    font-size: 1.375rem;
+    font-weight: 400;
     color: var(--indigo);
     margin-bottom: 0.5rem;
   }
@@ -696,10 +694,10 @@
     <div class="section-label">About — いのうえちず</div>
     <div class="about-grid">
       <div>
+        <div class="about-name-jp">いのうえちず</div>
         <div class="about-name">Chizu Inouye</div>
-        <div class="about-name-jp">い の う え　ち ず</div>
         <p class="about-text">広島県出身。2008年より沖縄に本格移住。ライター・編集者として、琉球・沖縄の文化と歴史を20年にわたり記録し、伝え続けてきた。</p>
-        <p class="about-text">琉球・沖縄文化誌『<a href="https://www.momoto.online/" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:0.1rem;">モモト</a>』の副編集長として、「100年残せる沖縄の雑誌」を目指した編集を牽引。首里まちづくり研究会理事、首里城再建への意見、琉球王国文化遺産集積・再興事業など、沖縄の文化的中枢との深い関わりを持つ。</p>
+        <p class="about-text">琉球・沖縄文化誌『<a href="https://www.momoto.online/" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:0.1rem;">モモト</a>』の編集長として、「100年残せる沖縄の雑誌」を目指した編集を牽引。首里まちづくり研究会理事、首里城再建への意見、琉球王国文化遺産集積・再興事業など、沖縄の文化的中枢との深い関わりを持つ。</p>
         <p class="about-text">本物志向・知的好奇心の高いゲストへの沖縄文化のアテンド、ハイエンドブランドとのコラボレーション、宮沢和史プロデュース「宮古島の旅」企画・ガイドなど、質の高い体験設計を現場で実現してきた。</p>
         <p class="about-text">世界のウチナーンチュ大会を通じ、ハワイ・中南米など世界に散らばるウチナーンチュとのネットワークを持つ。英語対応可。</p>
       </div>
@@ -742,43 +740,43 @@
 <section id="service">
   <div class="container">
     <div class="section-label">Service — できること</div>
-    <h2 class="service-heading reveal">What Kian offers.</h2>
-    <p class="service-sub reveal">本物の沖縄を、本物を求める人たちへ</p>
+    <h2 class="service-heading reveal">本物の沖縄を、本物を求める人たちへ</h2>
+    <p class="service-sub reveal">What Kian offers.</p>
     <div class="service-grid">
       <div class="service-item reveal">
         <div class="service-num">01</div>
-        <div class="service-title-en">Cultural Direction</div>
         <div class="service-title-jp">文化体験のディレクション</div>
+        <div class="service-title-en">Cultural Direction</div>
         <p class="service-desc">ハイエンドブランド・旅行エージェントとの連携による、本物志向のゲストへの沖縄文化体験の設計と現場ディレクション。琉装（本物）でのアテンドも可。</p>
       </div>
       <div class="service-item reveal">
         <div class="service-num">02</div>
-        <div class="service-title-en">Editorial & Writing</div>
         <div class="service-title-jp">編集・ライティング</div>
+        <div class="service-title-en">Editorial & Writing</div>
         <p class="service-desc">琉球・沖縄の文化・歴史・自然をテーマにした、媒体・企業制作物の編集・執筆・ディレクション。「消費されない」深度のコンテンツ制作。</p>
       </div>
       <div class="service-item reveal">
         <div class="service-num">03</div>
-        <div class="service-title-en">Planning & Guide</div>
         <div class="service-title-jp">企画・ガイド</div>
+        <div class="service-title-en">Planning & Guide</div>
         <p class="service-desc">観光事業者・自治体・メディアとの協業による沖縄体験プログラムの企画立案と現地ガイド。首里・琉球文化を軸にした本質的な沖縄の伝え方。</p>
       </div>
       <div class="service-item reveal">
         <div class="service-num">04</div>
-        <div class="service-title-en">Shuri & Ryukyu Heritage</div>
         <div class="service-title-jp">首里・琉球文化遺産</div>
+        <div class="service-title-en">Shuri & Ryukyu Heritage</div>
         <p class="service-desc">首里城再建、琉球王国文化遺産集積・再興事業など、沖縄の文化的中枢への深い関与を背景にした、専門的な知見の提供・監修・講演。</p>
       </div>
       <div class="service-item reveal">
         <div class="service-num">05</div>
-        <div class="service-title-en">Peace & Memory</div>
         <div class="service-title-jp">平和の記憶を伝える</div>
+        <div class="service-title-en">Peace & Memory</div>
         <p class="service-desc">若梅会理事として、故中山きく氏の意思を引き継ぎ、戦争の記憶と「行動する平和」を次世代へ伝えるための活動・講演・コンテンツ制作。</p>
       </div>
       <div class="service-item reveal">
         <div class="service-num">06</div>
-        <div class="service-title-en">Consultation</div>
         <div class="service-title-jp">相談・コンサルティング</div>
+        <div class="service-title-en">Consultation</div>
         <p class="service-desc">沖縄を舞台にした事業・コンテンツ・プロジェクトへの参画、アドバイザリー。世界のウチナーンチュネットワーク（ハワイ・中南米等）との連携も可。</p>
       </div>
     </div>
@@ -789,8 +787,8 @@
 <section id="contact">
   <div class="contact-inner">
     <div class="section-label" style="justify-content:center;">Contact — お問い合わせ</div>
-    <h2 class="contact-heading reveal">Get in touch.</h2>
-    <p class="contact-sub reveal">ご依頼・ご相談</p>
+    <h2 class="contact-heading reveal">ご依頼・ご相談</h2>
+    <p class="contact-sub reveal">Get in touch.</p>
     <p class="contact-note reveal">
       法人・団体・個人を問わず、お気軽にご相談ください。<br>
       内容を確認のうえ、担当よりご連絡いたします。
