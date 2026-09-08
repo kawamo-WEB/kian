@@ -866,24 +866,25 @@
       法人・団体・個人を問わず、お気軽にご相談ください。<br>
       内容を確認のうえ、担当よりご連絡いたします。
     </p>
-    <form class="contact-form reveal">
+    <form class="contact-form reveal" id="contact-form">
       <div class="form-group">
         <label>お名前 / Name</label>
-        <input type="text" placeholder="いのうえ　ちず">
+        <input type="text" name="name" placeholder="いのうえ　ちず" required>
       </div>
       <div class="form-group">
         <label>会社・団体名 / Organization</label>
-        <input type="text" placeholder="株式会社　例">
+        <input type="text" name="organization" placeholder="株式会社　例">
       </div>
       <div class="form-group">
         <label>メールアドレス / Email</label>
-        <input type="email" placeholder="info@example.com">
+        <input type="email" name="email" placeholder="info@example.com" required>
       </div>
       <div class="form-group">
         <label>ご用件 / Message</label>
-        <textarea rows="6" placeholder="ご依頼・ご相談の内容をお書きください。"></textarea>
+        <textarea name="message" rows="6" placeholder="ご依頼・ご相談の内容をお書きください。" required></textarea>
       </div>
-      <button type="submit" class="submit-btn">Send — 送信する</button>
+      <button type="submit" class="submit-btn" id="submit-btn">Send — 送信する</button>
+      <p id="form-status" style="margin-top:1rem;font-size:0.88rem;letter-spacing:0.1em;color:var(--gold);display:none;"></p>
     </form>
   </div>
 </section>
@@ -953,10 +954,38 @@
   `;
   document.querySelectorAll('#topics-grid .reveal').forEach(el => observer.observe(el));
 
-  document.querySelector('.contact-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('送信機能は実装予定です。ありがとうございます。');
-  });
+  // フォーム送信（Formspree）
+  const contactForm = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const formStatus = document.getElementById('form-status');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.textContent = '送信中...';
+      submitBtn.disabled = true;
+      try {
+        const res = await fetch('https://formspree.io/f/xppzolrk', {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          formStatus.textContent = 'お問い合わせを受け付けました。ありがとうございます。';
+          formStatus.style.display = 'block';
+          contactForm.reset();
+          submitBtn.textContent = '送信完了';
+        } else {
+          throw new Error('error');
+        }
+      } catch {
+        formStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+        formStatus.style.color = '#c0392b';
+        formStatus.style.display = 'block';
+        submitBtn.textContent = 'Send — 送信する';
+        submitBtn.disabled = false;
+      }
+    });
+  }
 </script>
 </body>
 </html>
