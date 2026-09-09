@@ -872,7 +872,7 @@
 <footer>
   <div class="footer-info">
     <div>© 2024 株式会社キアン. All rights reserved.</div>
-    <div>代表　いのうえちず　｜　首里、沖縄</div>
+    <div>代表　いのうえ ちず｜首里 沖縄</div>
     <div class="footer-domain">kian.ryukyu</div>
   </div>
 </footer>
@@ -916,22 +916,61 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   document.querySelectorAll('.service-item.reveal').forEach(el => serviceObserver.observe(el));
 
-  // トピックス 直接埋め込み（note RSS より）
-  document.getElementById('topics-grid').innerHTML = `
-    <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n9012be81c2e3" target="_blank" rel="noopener">
-      <div class="topic-date">2025年10月21日</div>
-      <div class="topic-title">遺族の追慕の情を侵害しないデジタルアーカイブ</div>
-    </a>
-    <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n0e6b04a7ffb9" target="_blank" rel="noopener">
-      <div class="topic-date">2025年10月11日</div>
-      <div class="topic-title">足るを知れない業の深さ</div>
-    </a>
-    <a class="topic-card reveal" href="https://note.com/chizu_inouye/n/n77070aec1200" target="_blank" rel="noopener">
-      <div class="topic-date">2025年10月11日</div>
-      <div class="topic-title">戦後80年のヌジファ ―戦災文化財が語る行動―</div>
-    </a>
-  `;
-  document.querySelectorAll('#topics-grid .reveal').forEach(el => observer.observe(el));
+  // トピックス：note RSS から自動取得（失敗時は手動データにフォールバック）
+  (function() {
+    const grid = document.getElementById('topics-grid');
+    const RSS_URL = 'https://note.com/chizu_inouye/rss';
+
+    // フォールバック用の手動データ（自動取得が失敗した場合に表示）
+    const fallback = [
+      { url: 'https://note.com/chizu_inouye/n/n9012be81c2e3', date: '2025年10月21日', title: '遺族の追慕の情を侵害しないデジタルアーカイブ' },
+      { url: 'https://note.com/chizu_inouye/n/n0e6b04a7ffb9', date: '2025年10月11日', title: '足るを知れない業の深さ' },
+      { url: 'https://note.com/chizu_inouye/n/n77070aec1200', date: '2025年10月11日', title: '戦後80年のヌジファ ―戦災文化財が語る行動―' }
+    ];
+
+    function render(articles) {
+      grid.innerHTML = articles.map(a => `
+        <a class="topic-card reveal" href="${a.url}" target="_blank" rel="noopener">
+          <div class="topic-date">${a.date}</div>
+          <div class="topic-title">${a.title}</div>
+        </a>`).join('');
+      document.querySelectorAll('#topics-grid .reveal').forEach(el => observer.observe(el));
+    }
+
+    function fmtDate(str) {
+      if (!str) return '';
+      const d = new Date(str);
+      return isNaN(d) ? '' : d.toLocaleDateString('ja-JP', { year:'numeric', month:'long', day:'numeric' });
+    }
+
+    // 複数のプロキシを順に試す
+    const proxies = [
+      url => 'https://corsproxy.io/?url=' + encodeURIComponent(url),
+      url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
+    ];
+
+    async function tryFetch(i) {
+      if (i >= proxies.length) { render(fallback); return; }
+      try {
+        const res = await fetch(proxies[i](RSS_URL));
+        if (!res.ok) throw new Error('bad status');
+        const text = await res.text();
+        const xml = new DOMParser().parseFromString(text, 'text/xml');
+        const items = Array.from(xml.querySelectorAll('item')).slice(0, 3);
+        if (items.length === 0) throw new Error('no items');
+        const articles = items.map(item => ({
+          url: item.querySelector('link')?.textContent || 'https://note.com/chizu_inouye',
+          date: fmtDate(item.querySelector('pubDate')?.textContent),
+          title: item.querySelector('title')?.textContent || ''
+        }));
+        render(articles);
+      } catch (e) {
+        tryFetch(i + 1);
+      }
+    }
+
+    tryFetch(0);
+  })();
 
   // フォーム送信（Formspree）
   const contactForm = document.getElementById('contact-form');
